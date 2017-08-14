@@ -1,17 +1,31 @@
 import hashlib
+import hmac
 
 
 class Md5(object):
-    @staticmethod
-    def get_name():
+    def get_name(self):
         return 'md5'
 
-    @staticmethod
-    def hash(blend):
+    def hash(self, blend):
         m = hashlib.md5()
         m.update(blend)
         return m.hexdigest()
 
-    @staticmethod
-    def is_md5(str_a):
+    def is_of_type(self, str_a):
+        return len(str_a) == 32
+
+
+class HMacMd5(object):
+    def __init__(self, secret):
+        self.secret = secret
+
+    def get_name(self):
+        return 'hmac-md5 with secret: "%s" ' % self.secret
+
+    def hash(self, blend):
+        m = hmac.new(self.secret)
+        m.update(blend)
+        return m.hexdigest()
+
+    def is_of_type(self, str_a):
         return len(str_a) == 32

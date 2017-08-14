@@ -24,7 +24,7 @@ if __name__ == '__main__':
         sys.exit(2)
 
     try:
-        configured_hash_string = config['hash']['string']
+        configured_hash_string = config['hash']['string'].strip()
     except:
         print('config.json needs to have "values" and "string" keys')
         sys.exit(2)
